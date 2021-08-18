@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[Thực hành] Xây dựng lớp mô phỏng sự hoạt động của đèn pin</title>
+</head>
+<body>
+<div id="game"></div>
+<script>
+    var Battery = function (energy) {
+        this.energy = energy;
+
+        this.setEnergy = function (_energy) {
+            this.energy1 = _energy
+        };
+
+        this.getEnergy = function () {
+            return this.energy;
+        };
+
+        this.decreaseEnergy = function () {
+            this.energy -= 1
+        };
+
+        this.getEner = function () {
+            this.energy +=2
+        }
+    };
+
+    var FalshLamp = function () {
+        this.battery = null;
+        this.status = false;
+
+        this.setBattery = function (battery_) {
+            this.battery = battery_
+        };
+        
+        this.getBatteryInFo = function () {
+            return this.battery
+        };
+        
+        this.turnOn = function () {
+            if (this.battery.getEnergy() > 0 ){
+                this.status = true;
+                this.light();
+                this.battery.decreaseEnergy()
+            }else {
+                console.log("Hết pin")
+            }
+        };
+
+        this.turnOff = function () {
+            this.status = false;
+            console.log("đã tắt");
+        };
+
+        this.light = function () {
+            if(this.status){
+                console.log("Dèn sang!   " + this.battery.getEnergy())
+            }
+        }
+    };
+    var battery = new Battery(10);
+    var flashlamp = new FalshLamp();
+    flashlamp.setBattery(battery) ;
+    function turnOn1() {
+        flashlamp.turnOn()
+    }
+
+    function turnOff1() {
+        flashlamp.turnOff()
+    }
+
+</script>
+<button type="button" onclick="turnOn1()" style="background-color: red; color: rgba(29,6,16,0.73); font-size: 18px ; width: 100px; height: 50px">ON</button>
+<button type="button" onclick="turnOff1()" style="background-color: red; color: rgba(29,6,16,0.73); font-size: 18px ; width: 100px; height: 50px">OFF</button>
+</body>
+</html>
